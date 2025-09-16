@@ -1,0 +1,114 @@
+@startuml
+interface main.interfaces.Assicurabile {
+~ double getCostoAssicurazione()
+}
+
+class main.fourwheels.Camion {
+- int maxCarico
++ int getMaxCarico()
++ void setMaxCarico(int)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+
+
+class main.service.Officina {
+~ List<Riparabile> veicoliInRiparazione
++ void accettaVeicolo(Riparabile)
++ void stampaSchedarioRiparazioni()
+}
+
+
+class main.fourwheels.AutoElettrica {
+- int autonomiaBettria
++ double getAutonomiaBatteria()
++ void ricarica()
+}
+
+
+class main.twowheels.Moto {
+- String tipo
++ String getTipo()
++ void setTipo(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
++ void faiRumore()
++ double getCostoAssicurazione()
++ double calcolaCostoRiparazione(int)
+}
+
+
+class main.mechanics.Motore {
+- int numeroDiSerie
+- String modelo
++ int getNumeroDiSerie()
++ void setNumeroDiSerie(int)
++ String getModelo()
++ void setModello(String)
+}
+
+
+class main.fourwheels.Auto {
+- int Nporte
++ int getNporte()
++ void setNporte(int)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
++ double calcolaCostoRiparazione(int)
+}
+
+
+class main.service.AgenziaAssicurativa {
+~ Set<Assicurabile> veicoliAssicurati
++ void aggiungiVeicolo(Assicurabile)
++ BigDecimal calcolaIncassoTotale()
+}
+
+
+interface main.interfaces.Riparabile {
+~ double calcolaCostoRiparazione(int)
+}
+
+class main.Veicolo {
+- String targa
+- String marca
+- String modello
+- int nPosti
++ void faiRumore()
++ String getTarga()
++ void setTarga(String)
++ String getMarca()
++ void setMarca(String)
++ String getModello()
++ int getnPosti()
++ void setnPosti(int)
++ String toString()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+interface main.interfaces.VeicoloElettrico {
+~ double getAutonomiaBatteria()
+~ void ricarica()
+}
+
+class Main {
++ {static} void main(String[])
+}
+
+
+
+main.Veicolo <|-- main.fourwheels.Camion
+main.interfaces.VeicoloElettrico <|.. main.fourwheels.AutoElettrica
+main.fourwheels.Auto <|-- main.fourwheels.AutoElettrica
+main.interfaces.Assicurabile <|.. main.twowheels.Moto
+main.interfaces.Riparabile <|.. main.twowheels.Moto
+main.Veicolo <|-- main.twowheels.Moto
+main.interfaces.Riparabile <|.. main.fourwheels.Auto
+main.Veicolo <|-- main.fourwheels.Auto
+main.mechanics.Motore <|-- main.Veicolo
+@enduml
