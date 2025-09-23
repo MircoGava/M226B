@@ -1,0 +1,102 @@
+@startuml
+class OnlineCourse {
+- String instructor
+- Difficulty difficulty
+- int estimatedHours
+~ void getContentType()
+~ void getDescription()
++ double applyDiscount(double)
++ double getPriceWithTax()
++ boolean getCertificationEligible()
+}
+
+
+class Main {
++ {static} void main(String[])
+}
+
+class EBook {
+- Genre genre
+- int pageCount
+- boolean isIllustrated
+~ void getContentType()
+~ void getDescription()
++ double applyDiscount(double)
++ double getPriceWithTax()
++ int getReadingTime()
+}
+
+
+class AudioBook {
+- String narrator
+- int duration
+- String language
+~ void getContentType()
+~ void getDescription()
++ void getFormattedDuration()
++ double applyDiscount(double)
++ double getPriceWithTax()
++ double calculatePrice()
+}
+
+
+abstract class DigitalContent {
+- int id
+- String title
+- String author
+- double basePrice
+- double currentDiscount
+~ {abstract}void getContentType()
+~ {abstract}void getDescription()
++ double calculatePrice()
++ double getBasePrice()
++ void setBasePrice(double)
++ double getCurrentDiscount()
++ void setCurrentDiscount(double)
++ String getTitle()
++ void setTitle(String)
+}
+
+
+interface Purchasable {
+~ double calculatePrice()
+~ double applyDiscount(double)
+~ {static} double getDefaultTaxRate()
+~ double getPriceWithTax()
+}
+
+enum Genre {
++  FICTION
++  NON_FICTION
++  BIOGRAPHY
++  SCIENCE
++  TECHNOLOGY
+}
+
+enum Difficulty {
++  BEGINNER
++  INTERMEDIATE
++  ADVANCED
+}
+
+class DigitalMagazine {
+- int issueNumber
+- LocalDate publicationDate
+- String category
+~ void getContentType()
+~ void getDescription()
++ double applyDiscount(double)
++ double getPriceWithTax()
++ boolean isRecentIssue()
++ double calculatePrice()
+}
+
+
+
+
+DigitalContent <|-- OnlineCourse
+DigitalContent <|-- EBook
+DigitalContent <|-- AudioBook
+Purchasable <|.. DigitalContent
+DigitalContent <|-- DigitalMagazine
+@enduml
