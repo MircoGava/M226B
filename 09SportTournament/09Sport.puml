@@ -1,0 +1,54 @@
+@startuml
+class TournamentManager {
+~ ArrayList<Team> teams
++ void addTeam(Team)
++ void updateScore(String,int)
++ void printTeamsSortedByNatural()
++ void printTeamsSortedBySchool()
++ void printTeamsSortedBySport()
++ void printScores()
+}
+
+
+class ComparatorSport {
++ int compare(Team,Team)
+}
+
+class Team {
+- String name
+- String schoolName
+- String sport
+- int points
+~ Map<String,Integer> totalPoints
++ int compareTo(Team)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
++ String getSchoolName()
++ String getSport()
++ int getPoints()
++ Map<String,Integer> getTotalPoints()
++ String getName()
++ void setPoints(int)
+}
+
+
+class Main {
++ {static} void main(String[])
+}
+
+class ComparatorSchoolName {
++ int compare(Team,Team)
+}
+
+
+Comparable [1] <|.. [N] Team
+java.util.Comparator [1] <|.. [N] ComparatorSport
+java.util.Comparator [1] <|.. [N] ComparatorSchoolName
+TournamentManager [1] <|.. [N] Main
+Team [1] <|.. [N] Main
+ComparatorSport [1] <|.. [N] TournamentManager
+Team [1] <|.. [N] TournamentManager
+ComparatorSchoolName [1] <|.. [N] TournamentManager
+
+@enduml
