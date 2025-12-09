@@ -1,0 +1,88 @@
+@startuml
+class MarineEcosystemSimulator {
++ {static} void main(String[])
+}
+
+class EcosystemManager {
+~ Set<AquaticCreature> creatures
++ void addCreature(AquaticCreature)
++ void filterByEnergy(int)
++ void getAdultCreaturesNames(int)
++ void findMostDangerousPredators(int,int)
++ void callAllPredatorsPolimorphicMethods(Predator)
++ void callAllPredatorsInheritedMethods(Predator)
+}
+
+
+abstract class Predator {
+- int ferocity
+- boolean huntAndata
++ int getFerocity()
++ {abstract}boolean hunt()
++ boolean isHuntAndata()
++ void setHuntAndata(boolean)
+}
+
+
+abstract class AquaticCreature {
+- String name
+- int age
+- int energy
+- int speed
+- boolean alive
++ void move()
++ void eat(int)
++ int getEnergy()
++ int getSpeed()
++ boolean isAlive()
++ void setEnergy(int)
++ void setAlive(boolean)
++ int getAge()
++ String getName()
+}
+
+
+interface Creature {
+~ void makeSound()
+~ void move()
+~ void eat(int)
+}
+
+class Shark {
++ void makeSound()
++ boolean hunt()
+}
+
+class Jellyfish {
++ void makeSound()
++ void facose()
+}
+
+class HerbivorousFish {
++ void makeSound()
+}
+
+class Dolphin {
+- int intelligence
++ void makeSound()
++ void facose()
++ boolean hunt()
+}
+
+
+
+
+AquaticCreature <|-- Predator
+Creature <|.. AquaticCreature
+Predator <|-- Shark
+AquaticCreature <|-- Jellyfish
+AquaticCreature <|-- HerbivorousFish
+Predator <|-- Dolphin
+MarineEcosystemSimulator <|-- EcosystemManager
+MarineEcosystemSimulator <|-- Jellyfish
+MarineEcosystemSimulator <|-- Dolphin
+MarineEcosystemSimulator <|-- Shark
+MarineEcosystemSimulator <|-- HerbivorousFish
+EcosystemManager <|-- Predator
+EcosystemManager <|-- AquaticCreature
+@enduml
